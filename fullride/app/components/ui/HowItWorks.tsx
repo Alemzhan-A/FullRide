@@ -4,7 +4,7 @@ const steps = [
   {
     number: "01",
     title: "Выберите университет",
-    description: "Изучите список университетов с полной стипендией и выберите подходящий для вас",
+    description: "Изучите список университетов с полной стипендией и выберите подходящие для вас",
     icon: (
       <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 14L8 10H16L12 14Z" fill="currentColor" />

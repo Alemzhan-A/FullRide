@@ -1,14 +1,55 @@
+import Image from 'next/image';
 import Container from '../Container';
 
 const universities = [
-  { name: "Harvard", logo: "🎓" },
-  { name: "MIT", logo: "🎓" },
-  { name: "Stanford", logo: "🎓" },
-  { name: "Yale", logo: "🎓" },
-  { name: "Princeton", logo: "🎓" },
-  { name: "Columbia", logo: "🎓" },
-  { name: "Oxford", logo: "🎓" },
-  { name: "Cambridge", logo: "🎓" },
+  {
+    name: "Harvard",
+    logo: "/universities/harvard_logo.png",
+    width: 120,
+    height: 120
+  },
+  {
+    name: "Stanford",
+    logo: "/universities/stanford_logo.png",
+    width: 120,
+    height: 120
+  },
+  {
+    name: "Cornell",
+    logo: "/universities/cornell_logo.png",
+    width: 120,
+    height: 120
+  },
+  {
+    name: "Brown",
+    logo: "/universities/brown_logo.png",
+    width: 120,
+    height: 120
+  },
+  {
+    name: "NYUAD",
+    logo: "/universities/nyuad_logo.png",
+    width: 120,
+    height: 120
+  },
+  {
+    name: "UBC",
+    logo: "/universities/ubc_logo.png",
+    width: 120,
+    height: 120
+  },
+  {
+    name: "KAIST",
+    logo: "/universities/KAIST_logo.png",
+    width: 120,
+    height: 120
+  },
+  {
+    name: "Northwestern",
+    logo: "/universities/northwestern_logo.png",
+    width: 120,
+    height: 120
+  }
 ];
 
 export default function UniversitiesScroll() {
@@ -27,18 +68,34 @@ export default function UniversitiesScroll() {
             <div className="flex animate-scroll gap-8">
               {/* Первый набор университетов */}
               {universities.map((uni, index) => (
-                <div key={index} className="flex-shrink-0 w-48 h-32 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center justify-center">
+                <div key={index} className="flex-shrink-0 w-48 h-32 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center justify-center p-4">
                   <div className="text-center space-y-2">
-                    <div className="text-4xl">{uni.logo}</div>
+                    <div className="relative w-20 h-20 mx-auto">
+                      <Image
+                        src={uni.logo}
+                        alt={`${uni.name} logo`}
+                        width={uni.width}
+                        height={uni.height}
+                        className="object-contain"
+                      />
+                    </div>
                     <div className="text-lg font-medium text-gray-800">{uni.name}</div>
                   </div>
                 </div>
               ))}
               {/* Дублируем набор для бесшовной анимации */}
               {universities.map((uni, index) => (
-                <div key={`dup-${index}`} className="flex-shrink-0 w-48 h-32 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center justify-center">
+                <div key={`dup-${index}`} className="flex-shrink-0 w-48 h-32 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center justify-center p-4">
                   <div className="text-center space-y-2">
-                    <div className="text-4xl">{uni.logo}</div>
+                    <div className="relative w-20 h-20 mx-auto">
+                      <Image
+                        src={uni.logo}
+                        alt={`${uni.name} logo`}
+                        width={uni.width}
+                        height={uni.height}
+                        className="object-contain"
+                      />
+                    </div>
                     <div className="text-lg font-medium text-gray-800">{uni.name}</div>
                   </div>
                 </div>

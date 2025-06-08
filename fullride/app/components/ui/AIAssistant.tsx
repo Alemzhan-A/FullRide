@@ -46,8 +46,8 @@ const modes = [
 ];
 
 export default function AIAssistant() {
-  const [activeMode, setActiveMode] = useState('essay');
-  const [inputText, setInputText] = useState('');
+  const [activeMode, setActiveMode] = useState('activity');
+  const [inputText, setInputText] = useState(modes[1].example.before);
 
   const currentMode = modes.find(mode => mode.id === activeMode);
 
@@ -94,9 +94,8 @@ export default function AIAssistant() {
                   <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-3 md:mb-4">Ваш текст</h3>
                   <textarea
                     value={inputText}
-                    onChange={(e) => setInputText(e.target.value)}
-                    placeholder="Введите ваш текст здесь..."
-                    className="w-full h-40 md:h-48 p-3 md:p-4 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 resize-none text-sm md:text-base"
+                    readOnly
+                    className="w-full h-40 md:h-48 p-3 md:p-4 rounded-xl border border-gray-200 bg-gray-50 text-gray-600 text-sm md:text-base resize-none"
                   />
                 </div>
 
@@ -105,7 +104,7 @@ export default function AIAssistant() {
                   <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-3 md:mb-4">Результат</h3>
                   <div className="w-full h-40 md:h-48 p-3 md:p-4 rounded-xl bg-gray-50 border border-gray-200">
                     <p className="text-gray-600 text-sm md:text-base">
-                      {inputText ? currentMode?.example.after : 'Здесь появится улучшенный текст...'}
+                      {currentMode?.example.after}
                     </p>
                   </div>
                 </div>
