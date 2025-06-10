@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
+import { ruRU } from '@clerk/localizations'
 
 const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
@@ -15,8 +17,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <ClerkProvider localization={ruRU}
+      appearance={{
+        layout: {
+          showOptionalFields: false,
+          socialButtonsPlacement: 'bottom',
+          privacyPageUrl: '/privacy',
+          termsPageUrl: '/terms'
+        },
+      }}>
+
+      <html lang="ru">
+        <body className={inter.className}>{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -3,9 +3,11 @@
 import Link from 'next/link';
 import Container from './Container';
 import { useState } from 'react';
+import { useUser, SignOutButton } from "@clerk/nextjs";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { isLoaded, isSignedIn } = useUser();
 
   return (
     <header className="bg-white/90 backdrop-blur-lg fixed w-full z-50 border-b border-gray-100/50 shadow-sm">
@@ -30,7 +32,7 @@ export default function Header() {
               Успешные истории
             </Link>
             <Link
-              href="/my-application"
+              href="/dashboard"
               className="text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-105 border-2 border-gray-100 rounded-full px-4 py-2 hover:border-gray-200"
             >
               Моя заявка
@@ -39,21 +41,33 @@ export default function Header() {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link
-              href="/login"
-              className="text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-105 border-2 border-gray-200 rounded-full px-6 py-2 hover:border-gray-300"
-            >
-              Войти
-            </Link>
-            <Link
-              href="/register"
-              className="relative group"
-            >
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-300"></div>
-              <div className="relative bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2.5 rounded-full font-medium hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105">
-                Регистрация
-              </div>
-            </Link>
+            {isLoaded && (
+              isSignedIn ? (
+                <SignOutButton>
+                  <button className="text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-105 border-2 border-gray-200 rounded-full px-6 py-2 hover:border-gray-300">
+                    Выйти
+                  </button>
+                </SignOutButton>
+              ) : (
+                <>
+                  <Link
+                    href="/sign-in"
+                    className="text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-105 border-2 border-gray-200 rounded-full px-6 py-2 hover:border-gray-300"
+                  >
+                    Войти
+                  </Link>
+                  <Link
+                    href="/sign-up"
+                    className="relative group"
+                  >
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-300"></div>
+                    <div className="relative bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2.5 rounded-full font-medium hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105">
+                      Регистрация
+                    </div>
+                  </Link>
+                </>
+              )
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -85,27 +99,39 @@ export default function Header() {
               Успешные истории
             </Link>
             <Link
-              href="/my-application"
+              href="/dashboard"
               className="block text-gray-600 hover:text-gray-900 transition-all duration-300 border-2 border-gray-100 rounded-full px-4 py-2 hover:border-gray-200"
             >
               Моя заявка
             </Link>
             <div className="pt-4 space-y-4 border-t border-gray-100">
-              <Link
-                href="/login"
-                className="block text-gray-600 hover:text-gray-900 transition-all duration-300 border-2 border-gray-200 rounded-full px-6 py-2 hover:border-gray-300 text-center"
-              >
-                Войти
-              </Link>
-              <Link
-                href="/register"
-                className="relative group block"
-              >
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-300"></div>
-                <div className="relative bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2.5 rounded-full font-medium hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 text-center">
-                  Регистрация
-                </div>
-              </Link>
+              {isLoaded && (
+                isSignedIn ? (
+                  <SignOutButton>
+                    <button className="w-full text-gray-600 hover:text-gray-900 transition-all duration-300 border-2 border-gray-200 rounded-full px-6 py-2 hover:border-gray-300 text-center">
+                      Выйти
+                    </button>
+                  </SignOutButton>
+                ) : (
+                  <>
+                    <Link
+                      href="/sign-in"
+                      className="block text-gray-600 hover:text-gray-900 transition-all duration-300 border-2 border-gray-200 rounded-full px-6 py-2 hover:border-gray-300 text-center"
+                    >
+                      Войти
+                    </Link>
+                    <Link
+                      href="/sign-up"
+                      className="relative group block"
+                    >
+                      <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-300"></div>
+                      <div className="relative bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2.5 rounded-full font-medium hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 text-center">
+                        Регистрация
+                      </div>
+                    </Link>
+                  </>
+                )
+              )}
             </div>
           </div>
         </div>
